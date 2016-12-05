@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+mongoose.Promise = global.Promise
 
 const login = (req,res,next) => {
   return res.render('index',{
@@ -17,11 +18,10 @@ const logout = (req,res,next) => {
 const create = (req,res,next) => {
   const UserModel = mongoose.model('User')
   const user = new UserModel(req.body)
-  user.save((err)=>{
-    if(err){
-      return next(err)
-    }
-    return res.json(user)
+  user.save().then(user=>{
+    res.status(200).json({user:user})
+  }).catch(err=>{
+    res.status(400).json({error: 'validation fail'})
   })
 }
 
