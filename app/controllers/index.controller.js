@@ -1,5 +1,8 @@
 const render = (req,res,next) => {
-  res.send('hello express')
+  res.render('index',{
+    title: 'Hello jade',
+    message: 'title by jade'
+  })
 }
 
 export default {
