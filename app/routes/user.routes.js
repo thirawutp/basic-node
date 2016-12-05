@@ -5,4 +5,5 @@ export default (app) => {
   app.post('/logout',userController.logout)
   app.route('/user')
     .post(userController.create)
+    .get(userController.list)
 }

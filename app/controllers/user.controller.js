@@ -21,12 +21,24 @@ const create = (req,res,next) => {
   user.save().then(user=>{
     res.status(200).json({user:user})
   }).catch(err=>{
+    console.log(err)
     res.status(400).json({error: 'validation fail'})
+  })
+  res.status(200)
+}
+
+const list = (req,res,next) => {
+  const UserModel = mongoose.model('User')
+  UserModel.findOne().then(users=>{
+    return res.json(users)
+  }).catch(err=>{
+    return res.json(err)
   })
 }
 
 export default {
   login,
   logout,
-  create
+  create,
+  list
 }
